@@ -3,7 +3,7 @@ import express, { json, urlencoded, } from 'express';
 import httpErrors from 'http-errors';
 import logger from 'morgan';
 import cors from 'cors';
-import indexRouter from './routes/index';
+import indexRouter from './routes/index.js';
 
 const app = express();
 app.use(cors())

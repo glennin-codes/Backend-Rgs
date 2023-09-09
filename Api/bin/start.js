@@ -8,17 +8,17 @@ import app from "../app.js";
 import createDebugger from "debug";
 import http from "http";
 import mongoose from "mongoose";
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
 dotenv.config();
-const debug = createDebugger('rental-app:server')
+const debug = createDebugger("rental-app:server");
 
 async function connectToMongoDB() {
   try {
     mongoose.set("strictQuery", false);
     await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     });
     console.log("Connected to MongoDB");
     startServer();
@@ -28,11 +28,10 @@ async function connectToMongoDB() {
   }
 }
 
+
 /**
  * Get port from environment and store in Express.
  */
-
-
 
 function startServer() {
   /**
@@ -102,7 +101,8 @@ function startServer() {
    */
   function onListening() {
     const addr = server.address();
-    const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+    const bind =
+      typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
     debug("Listening on " + bind);
     console.log(`server listenening on http://localhost:${port}`);
   }
