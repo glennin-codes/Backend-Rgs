@@ -1,6 +1,7 @@
 import moment from "moment/moment.js";
 import User from "../../Models/User.js";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 export const Login = async (req, res) => {
   const now = moment();
@@ -63,3 +64,6 @@ export const Login = async (req, res) => {
     return res.status(500).json({ message: "Server error." });
   }
 };
+// const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmRjOWFkODc3ODhhMWUyMjhkMjYxOCIsIm5hbWUiOiJKb2hudGUiLCJyb2xlIjoidXNlciIsImlzV29ya2luZ0hvdXJzIjp0cnVlLCJpYXQiOjE2OTQzNTM5MjUsImV4cCI6MTY5NDM4MjcyNX0.dW7EaYylkwKU3xX8sIUH_OWPMfLmf8xeoloGhzfFLzo"
+// const decoded= jwt.decode(token)
+// console.log(decoded);
