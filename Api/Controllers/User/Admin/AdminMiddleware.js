@@ -17,7 +17,7 @@ export const AllAdminMiddleware = (req, res, next) => {
     // Check if the user is an admin
     if (user.role === "admin" || user.role === "master-admin") {
       req.user = user; // Attach user information to the request
-      return next(); // Allow admin access regardless of token expiry
+      return next(); 
     }
 
     res.status(403).json({ message: "forbidden" });
