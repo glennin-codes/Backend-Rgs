@@ -5,6 +5,8 @@ import { CreateEmployee } from '../Controllers/User/Employee/CreateEmployee.js';
 import { getAllemployees } from '../Controllers/User/Employee/GetAllEmployees.js';
 import { DeleteEmployee } from '../Controllers/User/Employee/DeleteEmployee.js';
 import { UpdateEmployee } from '../Controllers/User/Employee/UpdateEmployee.js';
+import { MasterAdminMiddleware } from '../Controllers/User/Admin/MasterMiddleware.js';
+import { authenticateJWT } from '../Controllers/Auth/AuthMiddleware.js';
 
 const router = Router();
 
@@ -27,8 +29,8 @@ router.get('/api',(req,res)=>{
 );
 //Admin route
 router.route('/api/master-admin').post(CreateMasterAdmin);
-router.route('/api/admin').post(CreateAdmin)
-router.route('/api/employees').post(CreateEmployee).get(getAllemployees);
-router.route('/api/employees/:id').delete(DeleteEmployee).put(UpdateEmployee)
+router.route('/api/admin').post(MasterAdminMiddleware,CreateAdmin)
+router.route('/api/employees').post( MasterAdminMiddleware,CreateEmployee).get(MasterAdminMiddleware,getAllemployees);
+router.route('/api/employees/:id').delete(MasterAdminMiddleware,DeleteEmployee).put(authenticateJWT,UpdateEmployee)
 
 export default router;
