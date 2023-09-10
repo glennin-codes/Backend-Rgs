@@ -20,6 +20,6 @@ export const AllAdminMiddleware = (req, res, next) => {
       return next(); // Allow admin access regardless of token expiry
     }
 
-    req.status(403).json({ message: "forbidden" });
+    res.status(403).json({ message: "forbidden" });
   });
 };

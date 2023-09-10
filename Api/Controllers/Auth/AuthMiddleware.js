@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import moment from 'moment';
 
 // Middleware to authenticate JWT and check working hours
 export const authenticateJWT = (req, res, next) => {
@@ -27,9 +28,10 @@ export const authenticateJWT = (req, res, next) => {
       req.user = user; // Attach user information to the request
       return next(); // Allow admin access regardless of token expiry
     }
-
+    const workingHours= moment().hour()  >=  8 && moment().hour() < 17;
+    
     // Check the custom claim for working hours for non-admin users
-    if (!user.isWorkingHours) {
+    if (!workingHours) {
       return res.status(403).json({ message: 'Access denied outside working hours' });
     }
 

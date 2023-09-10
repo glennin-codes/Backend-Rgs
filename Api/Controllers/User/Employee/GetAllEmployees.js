@@ -13,6 +13,7 @@ export const getAllemployees = async (req, res) => {
       return res.status(404).json({ message: "No employees found" });
     }
   } catch (error) {
+    console.error(error)
     return res.status(500).json({ message: "Error fetching employees", error });
   }
 };

@@ -21,7 +21,7 @@ export const Login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
      // Check if it's a weekend (Friday or Saturday)
-     if (dayOfWeek === 5 || dayOfWeek === 6) {
+     if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
       // Deny login for employees during weekends
       if (user.role === "user") {
         return res
