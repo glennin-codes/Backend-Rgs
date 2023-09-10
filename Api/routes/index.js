@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { CreateMasterAdmin } from '../Controllers/User/Admin/CreateMasterAdmin.js';
-import { getAllAdmins } from '../Controllers/User/Admin/GetAllAdmin.js';
 import { CreateAdmin } from '../Controllers/User/Admin/CreateAdmin.js';
 import { CreateEmployee } from '../Controllers/User/Employee/CreateEmployee.js';
+import { getAllemployees } from '../Controllers/User/Employee/GetAllEmployees.js';
+import { DeleteEmployee } from '../Controllers/User/Employee/DeleteEmployee.js';
+import { UpdateEmployee } from '../Controllers/User/Employee/UpdateEmployee.js';
 
 const router = Router();
 
@@ -24,8 +26,9 @@ router.get('/api',(req,res)=>{
 }
 );
 //Admin route
-router.route('/api/master-admin').post(CreateMasterAdmin).get(getAllAdmins);
-router.route('/api/admin').post(CreateAdmin).get(getAllAdmins);
-router.route('/api/employees').post(CreateEmployee).get(getAllAdmins);
+router.route('/api/master-admin').post(CreateMasterAdmin);
+router.route('/api/admin').post(CreateAdmin)
+router.route('/api/employees').post(CreateEmployee).get(getAllemployees);
+router.route('/api/employees/:id').delete(DeleteEmployee).put(UpdateEmployee)
 
 export default router;
