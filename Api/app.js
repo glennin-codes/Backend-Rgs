@@ -4,14 +4,14 @@ import httpErrors from 'http-errors';
 import logger from 'morgan';
 import cors from 'cors';
 import indexRouter from './routes/index.js';
-import moment from "moment";
+
+
 const app = express();
-app.use(cors())
+app.use(cors());
 app.use(logger('dev'));
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
-
 // app.use(static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);

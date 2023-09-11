@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 // Middleware to authenticate JWT and check working hours
 export const authenticateJWT = (req, res, next) => {
@@ -22,13 +22,15 @@ export const authenticateJWT = (req, res, next) => {
 
       return res.status(403).json({ message: 'Invalid token' });
     }
-
+    const timezone = 'Africa/Mogadishu';
+    const now = moment().tz(timezone);
+  
     // Check if the user is an admin
     if (user.role === 'admin') {
       req.user = user; // Attach user information to the request
       return next(); // Allow admin access regardless of token expiry
     }
-    const workingHours= moment().hour()  >=  8 && moment().hour() < 17;
+    const workingHours= now.hour()  >=  8 && now.hour() < 17;
     
     // Check the custom claim for working hours for non-admin users
     if (!workingHours) {

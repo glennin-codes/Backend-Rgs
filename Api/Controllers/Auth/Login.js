@@ -1,10 +1,12 @@
-import moment from "moment/moment.js";
+
 import User from "../../Models/User.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import moment from 'moment-timezone';
 
 export const Login = async (req, res) => {
-  const now = moment();
+  const timezone = 'Africa/Mogadishu';
+  const now = moment().tz(timezone);
   const dayOfWeek = now.day();
   try {
    
@@ -39,7 +41,7 @@ export const Login = async (req, res) => {
 
       if (now.isBefore(workingHoursStart) || now.isAfter(workingHoursEnd)) {
         // Deny login for employees outside of working hours
-        if (user.role=== "user") {
+        if (user.role === "user") {
           return res
             .status(403)
             .json({ message: "Access denied outside working hours." });
@@ -53,6 +55,8 @@ export const Login = async (req, res) => {
       id: user._id,
       name: user.name,
       role: user.role,
+      location:user.location,
+      photo: user.photo,
       isWorkingHours,
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
@@ -67,3 +71,5 @@ export const Login = async (req, res) => {
 // const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmRjOWFkODc3ODhhMWUyMjhkMjYxOCIsIm5hbWUiOiJKb2hudGUiLCJyb2xlIjoidXNlciIsImlzV29ya2luZ0hvdXJzIjp0cnVlLCJpYXQiOjE2OTQzNTM5MjUsImV4cCI6MTY5NDM4MjcyNX0.dW7EaYylkwKU3xX8sIUH_OWPMfLmf8xeoloGhzfFLzo"
 // const decoded= jwt.decode(token)
 // console.log(decoded);
+
+
