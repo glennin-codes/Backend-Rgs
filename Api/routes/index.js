@@ -8,10 +8,15 @@ import { UpdateEmployee } from '../Controllers/User/Employee/UpdateEmployee.js';
 import { MasterAdminMiddleware } from '../Controllers/User/Admin/MasterMiddleware.js';
 import { authenticateJWT } from '../Controllers/Auth/AuthMiddleware.js';
 import { Login } from '../Controllers/Auth/Login.js';
+import multer from 'multer';
 
 const router = Router();
 
 /* GET index page. */
+//Configure multer to handle file uploads
+const storage = multer.memoryStorage(); // Store files in memory
+const upload = multer({ storage });
+
 router.get('/', (req, res) => {
   res.json({
     title: 'RGS system Management Api',
@@ -29,9 +34,9 @@ router.get('/api',(req,res)=>{
 }
 );
 //Admin route
-router.route('/api/master-admin').post(CreateMasterAdmin);
-router.route('/api/admin').post(MasterAdminMiddleware,CreateAdmin)
-router.route('/api/employees').post( MasterAdminMiddleware,CreateEmployee).get(MasterAdminMiddleware,getAllemployees);
+router.route('/api/master-admin').post(upload.single('photo'),CreateMasterAdmin);
+router.route('/api/admin').post(MasterAdminMiddleware,upload.single('photo'),CreateAdmin)
+router.route('/api/employees').post( MasterAdminMiddleware,upload.single('photo'),CreateEmployee).get(MasterAdminMiddleware,getAllemployees);
 router.route('/api/employees/:id').delete(MasterAdminMiddleware,DeleteEmployee).put(authenticateJWT,UpdateEmployee);
 router.route('/api/login').post(Login)
 

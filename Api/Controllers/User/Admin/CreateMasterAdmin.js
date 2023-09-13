@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 // Registration route for master-admins
 export const CreateMasterAdmin = async (req, res) => {
   try {
+    
     if (req.body) {
       const email = req.body.email;
       const password = req.body.password;
@@ -18,7 +19,7 @@ export const CreateMasterAdmin = async (req, res) => {
         phone: req.body.phone,
         email: req.body.email,
         password: hashedPassword,
-        photo: req.body.photo,
+        photo: '',//req.file
         role: "master-admin",
       });
 
