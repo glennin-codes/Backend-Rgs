@@ -9,7 +9,7 @@ import indexRouter from './routes/index.js';
 const app = express();
 app.use(cors());
 app.use(logger('dev'));
-app.use(json());
+app.use(express.json({ limit: '35mb' }));
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(static(join(__dirname, 'public')));
