@@ -9,7 +9,6 @@ on:
       - master
   workflow_dispatch:
 env:
- 
   AZURE_WEBAPP_PACKAGE_PATH: './api'      
          
 
@@ -49,6 +48,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+        
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -57,4 +57,4 @@ jobs:
           app-name: 'rgs-backend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6F25AFAC40914991839F337FC370D3AF }}
-          package: .
+          package: ./api
