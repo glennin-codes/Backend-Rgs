@@ -9,6 +9,10 @@ import { MasterAdminMiddleware } from '../Controllers/User/Admin/MasterMiddlewar
 import { authenticateJWT } from '../Controllers/Auth/AuthMiddleware.js';
 import { Login } from '../Controllers/Auth/Login.js';
 import multer from 'multer';
+import { getData } from '../Controllers/RealEstate/GetAllData.js';
+import { getSingleData } from '../Controllers/RealEstate/getSingleData.js';
+import { editData } from '../Controllers/RealEstate/updateData.js';
+import { deleteData } from '../Controllers/RealEstate/deleteData.js';
 
 const router = Router();
 
@@ -38,6 +42,8 @@ router.route('/api/master-admin').post(upload.single('photo'),CreateMasterAdmin)
 router.route('/api/admin').post(MasterAdminMiddleware,upload.single('photo'),CreateAdmin)
 router.route('/api/employees').post( MasterAdminMiddleware,upload.single('photo'),CreateEmployee).get(MasterAdminMiddleware,getAllemployees);
 router.route('/api/employees/:id').delete(MasterAdminMiddleware,DeleteEmployee).put(authenticateJWT,UpdateEmployee);
-router.route('/api/login').post(Login)
+router.route('/api/login').post(Login);
+router.route('/api/datas').get(getData);
+router.route('/api/datas/:id').get(getSingleData).put(editData).delete(deleteData);
 
 export default router;

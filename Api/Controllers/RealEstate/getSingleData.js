@@ -1,6 +1,6 @@
 import { RealEsatate } from "../../Models/realEstate.js";
 
-export const getSingleData=async()=>{
+export const getSingleData=async(req,res)=>{
     try {
         const id =req.params.id
         const data=await RealEsatate.findOne({

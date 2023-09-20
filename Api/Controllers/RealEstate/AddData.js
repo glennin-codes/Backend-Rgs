@@ -4,18 +4,23 @@ import { RealEsatate } from "../../Models/realEstate.js";
 export const createData = async (req, res) => {
   try {
     // Extract data from the request body
-    const { name, phone, location, paymentUniqueId, numberOfFamily, landInSquareMetres, houseNo, religion } = req.body;
+    const { name, phone, location,userId, userName,paymentUniqueId, numberOfFamily, landInSquareMetres, houseNo, religion } = req.body;
 
     // Create a new User document
     const newData = new RealEsatate({
       name,
       phone,
+      userId,
       location,
       paymentUniqueId,
       numberOfFamily,
       landInSquareMetres,
       houseNo,
       religion,
+      postedBy: {
+        userId: userId,
+        userName: userName,
+      },
     });
 
     // Save the user to the database

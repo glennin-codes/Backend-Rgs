@@ -14,7 +14,7 @@ export const deleteData=async(req,res)=>{
             })
         }else{
             res.status(404).json({
-                message:"Not Found"
+                message:"data Not Found"
             })
         }
     }
