@@ -23,7 +23,7 @@ export const getData = async (req, res) => {
       query.$or = [
         { name: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive search by name
         { location: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive search by location
-        { paymentId: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive search by paymentId
+        { paymentUniqueId: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive search by paymentId
       ];
     }
 
