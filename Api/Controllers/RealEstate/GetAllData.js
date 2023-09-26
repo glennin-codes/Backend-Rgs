@@ -12,9 +12,14 @@ export const getData = async (req, res) => {
 
     // Check if startDate and endDate parameters are provided
     if (startDate && endDate) {
-      query.dateField = {
-        $gte: new Date(startDate),
-        $lte: new Date(endDate),
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const startDateWithoutTime = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+      const endDateWithoutTime = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+      query.date = {
+        $gte: startDateWithoutTime,
+        $lte: endDateWithoutTime,
       };
     }
 
