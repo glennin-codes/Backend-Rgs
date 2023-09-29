@@ -14,7 +14,7 @@ import { getSingleData } from '../Controllers/RealEstate/getSingleData.js';
 import { editData } from '../Controllers/RealEstate/updateData.js';
 import {  deleteData } from '../Controllers/RealEstate/deleteData.js';
 import { createData } from '../Controllers/RealEstate/AddData.js';
-import { removeAll } from '../Controllers/RealEstate/deleteAll.js';
+// import { removeAll } from '../Controllers/RealEstate/deleteAll.js';
 
 const router = Router();
 
