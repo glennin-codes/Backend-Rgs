@@ -12,7 +12,9 @@ import multer from 'multer';
 import { getData } from '../Controllers/RealEstate/GetAllData.js';
 import { getSingleData } from '../Controllers/RealEstate/getSingleData.js';
 import { editData } from '../Controllers/RealEstate/updateData.js';
-import { deleteData } from '../Controllers/RealEstate/deleteData.js';
+import {  deleteData } from '../Controllers/RealEstate/deleteData.js';
+import { createData } from '../Controllers/RealEstate/AddData.js';
+import { removeAll } from '../Controllers/RealEstate/deleteAll.js';
 
 const router = Router();
 
@@ -43,7 +45,7 @@ router.route('/api/admin').post(MasterAdminMiddleware,upload.single('photo'),Cre
 router.route('/api/employees').post( MasterAdminMiddleware,upload.single('photo'),CreateEmployee).get(MasterAdminMiddleware,getAllemployees);
 router.route('/api/employees/:id').delete(MasterAdminMiddleware,DeleteEmployee).put(authenticateJWT,UpdateEmployee);
 router.route('/api/login').post(Login);
-router.route('/api/datas').get(getData);
+router.route('/api/datas').get(MasterAdminMiddleware,getData).post(authenticateJWT,createData);
 router.route('/api/datas/:id').get(getSingleData).put(editData).delete(deleteData);
-
+// router.route('/api/delete').delete(removeAll);
 export default router;
