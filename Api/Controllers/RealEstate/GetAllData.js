@@ -26,9 +26,10 @@ export const getData = async (req, res) => {
     // Build a query to search by name, location, and paymentId
     if (searchQuery) {
       query.$or = [
-        { name: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive search by name
-        { location: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive search by location
-        { paymentUniqueId: { $regex: searchQuery, $options: 'i' } }, // Case-insensitive search by paymentId
+        {  mudMar: { $regex: searchQuery, $options: 'i' } }, 
+        { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
+        { Degmada: { $regex: searchQuery, $options: 'i' } }, 
+        { Tirsi: { $regex: searchQuery, $options: 'i' } }, 
       ];
     }
 

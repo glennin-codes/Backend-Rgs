@@ -1,44 +1,83 @@
 import mongoose, { Schema } from "mongoose";
 const userSchema = new mongoose.Schema({
-  name: {
+  No: { 
+    type: String
+   },
+  BollectarioNo: {
     type: String,
-  
   },
-  phone: {
+  Tirsi: {
     type: String,
-   
   },
-  location: {
+  BolletaNo: {
+    type: String,
+  },
+  Taariikh: {
+    type: String,
+  },
+
+  Sanadka: {
+    type: String,
+  },
+  Xaafadda: {
+    type: String,
+  },
+  vacant1: {
+    type: String,
+  },
+  vacant2: {
+    type: String,
+  },
+  mudMar: {
+    type: String,
+  },
+  X: {
+    type: String,
+  },
+  kunaYaal: {
+    type: String,
+  },
+  Degmada: {
+    type: String,
+  },
+  SoohdintiisuTahay: { 
+    type: String 
+  },
+  Waqooyi: {
+    type: String,
+  },
+  Galbeed: {
+    type: String,
+  },
+  Bari: {
+    type: String,
+  },
+  kofuur: {
+    type: String,
+  },
+  lacagNo: {
+    type: String,
+  },
+  ee: {
+    type: String,
+  },
+  Agaasimaha: {
+    type: String,
+  },
+  Duqa: {
     type: String,
   },
   date: {
     type: Date,
     default: Date.now,
   },
-  paymentUniqueId: {
-    type: String,
-  },
-  numberOfFamily: {
-    type: Number,
-  },
-  landInSquareMetres: {
-    type: Number,
-  },
-  houseNo: {
-    type: String,
-  },
-  religion: {
-    type: String,
-  },
   postedBy: {
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User', 
-      required: true,
+      ref: "User",
     },
     userName: {
       type: String,
-      required: true,
     },
   },
 });
