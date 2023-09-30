@@ -34,8 +34,13 @@ export const authenticateJWT = (req, res, next) => {
     
     // Check the custom claim for working hours for non-admin users
     if (!workingHours) {
+      if(user.role === 'user'){
+
       return res.status(403).json({ message: 'Access denied outside working hours' });
+      }
+
     }
+
 
     req.user = user; // Attach user information to the request
     next();
