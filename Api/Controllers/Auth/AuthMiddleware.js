@@ -20,7 +20,7 @@ export const authenticateJWT = (req, res, next) => {
         }
       }
 
-      return res.status(403).json({ message: 'Invalid token' });
+      return res.status(403).json({ message: 'Invalid token',err:err });
     }
     const timezone = 'Africa/Mogadishu';
     const now = moment().tz(timezone);
