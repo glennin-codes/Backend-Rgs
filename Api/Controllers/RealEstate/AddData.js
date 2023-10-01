@@ -5,7 +5,8 @@ export const createData = async (req, res) => {
   try {
     // Extract data from the request body
     const { 
-      userId, 
+      id,
+      name, 
       userName,
       No,
       BollectarioNo,
@@ -56,8 +57,8 @@ export const createData = async (req, res) => {
       Agaasimaha,
       Duqa,
       postedBy: {
-        userId: userId,
-        userName: userName,
+        userId: id,
+        userName: name,
       },
     });
 
