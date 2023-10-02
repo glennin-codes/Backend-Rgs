@@ -1,8 +1,10 @@
 import sgMail from '@sendgrid/mail';
 import { sendCredentials } from './Sendmailgen.js';
+import dotenv from "dotenv";
 
+dotenv.config();
 export const sendEmail=async(name,email,pwd)=>{
-    sgMail.setApiKey('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');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 console.log(name,email,pwd);
     const msg = {
         to: email,
