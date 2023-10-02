@@ -29,7 +29,7 @@ export const sendCredentials=(name,email,pwd)=>{
             ],
           },
           action: {
-            instructions: 'Please log in within the next 2hours or else your credentials will be revoked from our system,using the following link:',
+            instructions: 'Please log in within the next 2hours or else your credentials will be revoked from our system,use link bellow:',
             button: {
               color: '#22BC66',
               text: 'Log In',
