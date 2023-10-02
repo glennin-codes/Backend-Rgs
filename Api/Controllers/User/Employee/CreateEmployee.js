@@ -1,8 +1,13 @@
 // Used to create a new employee
 import bcrypt from 'bcrypt'
 import User from '../../../Models/User.js';
+import moment from 'moment-timezone';
+import { sendEmail } from '../../../Util/Email/email.js';
+
 
 export const CreateEmployee = async (req, res) => {
+  const timezone = 'Africa/Mogadishu';
+const now = moment().tz(timezone);
   try {
     if(req.body){
         const email=req.body.email;
@@ -13,20 +18,23 @@ export const CreateEmployee = async (req, res) => {
         }
     // Create a new master-admin user
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newMasterAdmin = new User({
+    const newEmployee = new User({
         name: req.body.name,
         location: req.body.location,
         phone:req.body.phone,
         email: req.body.email,
         password: hashedPassword,
         photo:req.body.photo,
+        accountExpiration: moment(now).add(2, 'hours').toDate(),
         
     });
+    console.log(newEmployee.accountExpiration)
    
-    await newMasterAdmin.save();
+    await newEmployee.save();
 
     res.status(201).json({ message: "Employee user created successfully" });
-    }
+    sendEmail(newEmployee.name,newEmployee.email,newEmployee.password)
+  }
     else{
         return res.status(
             400
@@ -36,7 +44,7 @@ export const CreateEmployee = async (req, res) => {
     console.error(error.message)
     res
       .status(500)
-      .json({ message: "Error creating master-admin user", error });
+      .json({ message: "Error creating employee user", error });
   }
 };
 

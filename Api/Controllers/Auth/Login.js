@@ -22,6 +22,19 @@ export const Login = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
+    if (user.accountExpiration) {
+      // Calculate the allowed login window (e.g., 2 hours from the account creation time)
+      const accountExpirationTime = moment(user.accountExpiration);
+      const loginWindowEnd = accountExpirationTime.clone().add(2, 'hours');
+      
+      if (now.isAfter(loginWindowEnd)) {
+        // Account has passed the login window, deny login
+        return res.status(403).json({ message: "Access denied. Account login window expired. Please contact support." });
+      } else {
+        // Nullify the "accountExpiration" to treat the user as an old employee for future logins
+        await User.findByIdAndUpdate(user._id, { accountExpiration: null });
+      }
+    }
      // Check if it's a weekend (Friday or Saturday)
      if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
       // Deny login for employees during weekends
@@ -68,8 +81,6 @@ export const Login = async (req, res) => {
     return res.status(500).json({ message: "Server error." });
   }
 };
-// const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmRjOWFkODc3ODhhMWUyMjhkMjYxOCIsIm5hbWUiOiJKb2hudGUiLCJyb2xlIjoidXNlciIsImlzV29ya2luZ0hvdXJzIjp0cnVlLCJpYXQiOjE2OTQzNTM5MjUsImV4cCI6MTY5NDM4MjcyNX0.dW7EaYylkwKU3xX8sIUH_OWPMfLmf8xeoloGhzfFLzo"
-// const decoded= jwt.decode(token)
-// console.log(decoded);
+
 
 

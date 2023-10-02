@@ -14,6 +14,8 @@ import { getSingleData } from '../Controllers/RealEstate/getSingleData.js';
 import { editData } from '../Controllers/RealEstate/updateData.js';
 import {  deleteData } from '../Controllers/RealEstate/deleteData.js';
 import { createData } from '../Controllers/RealEstate/AddData.js';
+import { test } from '../Util/Email/testing.js';
+
 // import { removeAll } from '../Controllers/RealEstate/deleteAll.js';
 
 const router = Router();
@@ -48,4 +50,5 @@ router.route('/api/login').post(Login);
 router.route('/api/datas').get(MasterAdminMiddleware,getData).post(authenticateJWT,createData);
 router.route('/api/datas/:id').get(getSingleData).put(editData).delete(deleteData);
 // router.route('/api/delete').delete(removeAll);
+router.route('/api/send').post(test)
 export default router;

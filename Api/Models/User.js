@@ -7,6 +7,7 @@ const userSchema = new Schema({
   email: String,
   password: String,
   photo: String,
+  accountExpiration:String,
 
   role: {
     type: String,

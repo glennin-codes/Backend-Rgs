@@ -11,6 +11,7 @@
     "dev": "nodemon ./bin/start"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -19,6 +20,7 @@
     "express": "^4.17.2",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
+    "mailgen": "^2.0.27",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "mongoose": "^7.5.0",

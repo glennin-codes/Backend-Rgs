@@ -10,9 +10,8 @@ export const CreateAdmin = async (req, res) => {
         if(checkUser){
             return res.status(409).json({message:"User already exists"})
         }
-    // Create a new master-admin user
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newMasterAdmin = new User({
+    const newAdmin = new User({
         name: req.body.name,
         location: req.body.location,
         phone:req.body.phone,
@@ -22,7 +21,7 @@ export const CreateAdmin = async (req, res) => {
         role:"admin"
     });
    
-    await newMasterAdmin.save();
+    await newAdmin.save();
 
     res.status(201).json({ message: "admin user created successfully" });
     }
@@ -35,7 +34,7 @@ export const CreateAdmin = async (req, res) => {
     console.error(error.message)
     res
       .status(500)
-      .json({ message: "Error creating master-admin user", error });
+      .json({ message: "Error creating admin user", error });
   }
 };
 
