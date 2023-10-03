@@ -4,12 +4,18 @@ export const UpdateEmployee = async (req, res) => {
   try {
     const id = req.params.id;
     const password = req.body.password;
-    if (password) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const employee = await User.findOneAndUpdate(
       { _id: id },
       {
+        name: req.body.name,
+        location: req.body.location,
+        phone: req.body.phone,
+        email: req.body.email,
+
+        // photo: "",
         password: hashedPassword,
       },
       { new: true }
