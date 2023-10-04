@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 export const sendEmail=async(name,email,pwd)=>{
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  
 console.log(name,email,pwd);
     const msg = {
         to: email,
@@ -14,6 +14,7 @@ console.log(name,email,pwd);
       };
    
       try {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
        const result= await sgMail.send(msg);
        if(result){
         console.log(result);
@@ -22,8 +23,5 @@ console.log(name,email,pwd);
       } catch (error) {
         console.error(error);
 
-        if (error.response) {
-          console.error(error.response.body)
-        }
       }
 }
