@@ -1,3 +1,5 @@
+import Mailgen from "mailgen";
+
 export const sendCredentials = (name, email, pwd) => {
   // Initialize Mailgen
   const mailGenerator = new Mailgen({
