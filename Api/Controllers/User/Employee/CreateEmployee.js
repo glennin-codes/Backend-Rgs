@@ -17,7 +17,13 @@ export const CreateEmployee = async (req, res) => {
       if (checkUser) {
         return res.status(409).json({ message: "User already exists" });
       }
-
+      // Check if a user with a similar location already exists
+      const checkUserLocation = await User.findOne({ location: location });
+      if (checkUserLocation) {
+        return res
+          .status(409)
+          .json({ message: "User with a similar location already exists" });
+      }
       // Create a new master-admin user
       const hashedPassword = await bcrypt.hash(password, 10);
       const newEmployee = new User({
