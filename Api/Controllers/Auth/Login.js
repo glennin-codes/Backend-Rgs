@@ -42,7 +42,7 @@ export const Login = async (req, res) => {
           if (user.role === "user") {
             return res
               .status(403)
-              .json({ message: "Your verification was a success you can login later,cause no access is granted during weekends." });
+              .json({ message: "Your verification was a success But you can login later,cause no access is granted during weekends." });
           }
         } else {
           // Check if it's outside of working hours (8am to 5pm)
@@ -58,7 +58,7 @@ export const Login = async (req, res) => {
             if (user.role === "user") {
               return res
                 .status(403)
-                .json({ message: "Your verification was a success you can login later,cause no access is granted  outside working hours." });
+                .json({ message: "Your verification was a success But you can login later,cause no access is granted  outside working hours." });
             }
           }
         }
