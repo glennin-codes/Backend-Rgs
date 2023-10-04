@@ -1,4 +1,4 @@
-import { RealEsatate } from "../../Models/realEstate.js";
+import RealEsatate from "../../Models/realEstate.js";
 
 // Controller function to edit a user by ID
 export const editData = async (req, res) => {

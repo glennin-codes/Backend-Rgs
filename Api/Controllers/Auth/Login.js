@@ -1,7 +1,8 @@
-import User from "../../Models/User.js";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import moment from "moment-timezone";
+import User from "../../Models/User.js";
 
 export const Login = async (req, res) => {
   const timezone = "Africa/Mogadishu";

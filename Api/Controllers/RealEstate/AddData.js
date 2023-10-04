@@ -1,4 +1,5 @@
-import { RealEsatate } from "../../Models/realEstate.js";
+
+import RealEsatate from "../../Models/realEstate.js";
 
 // Controller function to create a new user
 export const createData = async (req, res) => {

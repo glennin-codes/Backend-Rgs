@@ -1,4 +1,4 @@
-import { RealEsatate } from "../../Models/realEstate.js";
+import RealEsatate from "../../Models/realEstate.js";
 
 export const getData = async (req, res) => {
   const page = parseInt(req.query.page) || 1;

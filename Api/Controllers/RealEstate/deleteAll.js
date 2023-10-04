@@ -1,4 +1,4 @@
-import { RealEsatate } from "../../Models/realEstate.js";
+import RealEsatate from "../../Models/realEstate.js";
 
 export const removeAll = async (req, res) => {
     try {
