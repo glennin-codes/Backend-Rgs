@@ -47,7 +47,7 @@ router.route('/api/master-admin').post(upload.single('photo'),CreateMasterAdmin)
 router.route('/api/admin').post(MasterAdminMiddleware,upload.single('photo'),CreateAdmin)
 router.route('/api/employees').post( MasterAdminMiddleware,upload.single('photo'),CreateEmployee).get(MasterAdminMiddleware,getAllemployees);
 router.route('/api/employees/:id').delete(MasterAdminMiddleware,DeleteEmployee).put(authenticateJWT,UpdateEmployee);
-router.route('api/user/:id').post(MasterAdminMiddleware,RenewaAcount);
+router.route('api/user/renewal').post(MasterAdminMiddleware,RenewaAcount);
 router.route('/api/login').post(Login);
 router.route('/api/datas').get(MasterAdminMiddleware,getData).post(authenticateJWT,createData);
 router.route('/api/datas/:id').get(getSingleData).put(editData).delete(deleteData);
