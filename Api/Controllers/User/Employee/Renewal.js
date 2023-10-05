@@ -31,12 +31,12 @@ export const RenewaAcount = async (req, res) => {
       
          user.password = hashedPassword;
         user.accountExpiration = moment(now).add(1, "hours").toDate();
-        await user.save()
+        await user.save();
   
       // Send an email to the user with their new credentials
      await  sendRenewalEmail(user.name,user.email,newPassword);
   
-      return res.status(200).json({ message: "Account renewed successfully" });
+      return res.status(200).json({ message: "Account renewed successfully,the user should check his email" });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Server error" });
