@@ -9,7 +9,7 @@ export const RenewaAcount = async (req, res) => {
     try {
       // Authenticate the master admin here (e.g., check admin credentials)
   
-      const { id } = req.body.id;
+      const { id } = req.body;
   
       // Check if the account associated with the email is revoked
       const user = await User.findOne({ _id:id });
