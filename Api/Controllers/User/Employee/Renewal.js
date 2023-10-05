@@ -36,7 +36,7 @@ export const RenewaAcount = async (req, res) => {
       // Send an email to the user with their new credentials
      await  sendRenewalEmail(user.name,user.email,newPassword);
   
-      return res.status(200).json({ message: "Account renewed successfully,the user should check his email" });
+      return res.status(200).json({ message: "Account renewed successfully,the user should check his email within 1 hr" });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Server error" });

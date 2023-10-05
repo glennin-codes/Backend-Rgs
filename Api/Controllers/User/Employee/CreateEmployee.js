@@ -41,7 +41,7 @@ export const CreateEmployee = async (req, res) => {
 
       await newEmployee.save();
       await sendEmail(name, email, password);
-      res.status(201).json({ message: "Employee user created successfully" });
+      res.status(201).json({ message: "Employee was created successfully" });
     } else {
       return res
         .status(400)
