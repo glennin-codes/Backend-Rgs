@@ -1,5 +1,4 @@
 import sgMail from "@sendgrid/mail";
-import { sendCredentials } from "./Sendmailgen.js";
 import dotenv from "dotenv";
 import { sendRenewalCredentials } from "./renewalMailgen.js";
 
