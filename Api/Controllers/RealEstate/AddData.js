@@ -8,7 +8,7 @@ export const createData = async (req, res) => {
     const { 
       id,
       name, 
-      userName,
+ loaction,
       No,
       BollectarioNo,
       Tirsi,
@@ -57,6 +57,7 @@ export const createData = async (req, res) => {
       ee,
       Agaasimaha,
       Duqa,
+      location,
       postedBy: {
         userId: id,
         userName: name,

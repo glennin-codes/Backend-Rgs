@@ -30,6 +30,7 @@ export const getData = async (req, res) => {
         { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
         { Degmada: { $regex: searchQuery, $options: 'i' } }, 
         { Tirsi: { $regex: searchQuery, $options: 'i' } }, 
+        { location: { $regex: searchQuery, $options: 'i' } }, 
       ];
     }
 

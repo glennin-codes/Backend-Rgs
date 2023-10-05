@@ -24,7 +24,7 @@ export const Login = async (req, res) => {
     if (user.accountExpiration) {
       // Calculate the allowed login window (e.g., 2 hours from the account creation time)
       const accountExpirationTime = moment(user.accountExpiration);
-      const loginWindowEnd = accountExpirationTime.clone().add(2, "hours");
+      const loginWindowEnd = accountExpirationTime.clone()
 
       if (now.isAfter(loginWindowEnd)) {
         // Account has passed the login window, deny login

@@ -2,7 +2,7 @@
 import bcrypt from "bcrypt";
 import User from "../../../Models/User.js";
 import moment from "moment-timezone";
-import { sendEmail } from "../../../Util/Email/email.js";
+import { sendEmail } from "../../../Utils/Email/email.js";
 
 export const CreateEmployee = async (req, res) => {
   const timezone = "Africa/Mogadishu";
@@ -14,7 +14,7 @@ export const CreateEmployee = async (req, res) => {
       const password = req.body.password;
       const location =req.body.location;
       const phone=req.body.phone;
-      
+
       const checkUser = await User.findOne({ email: email });
       if (checkUser) {
         return res.status(409).json({ message: "User already exists" });

@@ -1,8 +1,8 @@
 import mongoose, { Schema } from "mongoose";
 const estateSchema = new mongoose.Schema({
-  No: { 
-    type: String
-   },
+  No: {
+    type: String,
+  },
   BollectarioNo: {
     type: String,
   },
@@ -40,8 +40,8 @@ const estateSchema = new mongoose.Schema({
   Degmada: {
     type: String,
   },
-  SoohdintiisuTahay: { 
-    type: String 
+  SoohdintiisuTahay: {
+    type: String,
   },
   Waqooyi: {
     type: String,
@@ -71,6 +71,9 @@ const estateSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  location: {
+    type: String
+  },
   postedBy: {
     userId: {
       type: Schema.Types.ObjectId,
@@ -85,31 +88,28 @@ const estateSchema = new mongoose.Schema({
 const RealEsatate = mongoose.model("RealEsatate", estateSchema);
 
 async function createIndexes() {
-  // await RealEsatate.collection.dropIndexes();
+  await RealEsatate.collection.dropIndexes();
 
-// // Concatenate the fields you want to search
-// estateSchema.virtual("searchField").get(function () {
-//   return this.mudMar + " " + this.kunaYaal + " " + this.Degmada + " " + this.Tirsi;
-// });
+  // Concatenate the fields you want to search
+  estateSchema.virtual("searchField").get(function () {
+    return this.mudMar + " " + this.kunaYaal + " " + this.Degmada + " " + this.Tirsi + this.location + " ";
+  });
 
-// // Create a text index on the concatenated field
-// await RealEsatate.collection.createIndex({ searchField: "text" });
+  // Create a text index on the concatenated field
+  await RealEsatate.collection.createIndex({ searchField: "text" });
 
-await RealEsatate.collection.createIndex({ date: 1 });
-// await RealEsatate.collection.createIndex({ mudMar: "text" }, { name: "mudMar_text_index" });
-// await RealEsatate.collection.createIndex({ kunaYaal: "text" }, { name: "kunaYaal_text_index" });
-// await RealEsatate.collection.createIndex({ Degmada: "text" }, { name: "Degmada_text_index" });
-// await RealEsatate.collection.createIndex({ Tirsi: "text" }, { name: "Tirsi_text_index" });
-//   await RealEsatate.collection.createIndex({ Degmada: "text" }); // Index for text search
-//   await RealEsatate.collection.createIndex({ Tirsi: "text" }); // Index for text search
+  await RealEsatate.collection.createIndex({ date: 1 });
+ 
 }
 
 // Call the createIndexes function before starting your application
-createIndexes().then(() => {
-  console.log("Indexes created successfully");
-  // Start your application or server here
-}) .catch((error) => {
-  console.error("Error creating index:", error);
-});
+createIndexes()
+  .then(() => {
+    console.log("Indexes created successfully");
+    // Start your application or server here
+  })
+  .catch((error) => {
+    console.error("Error creating index:", error);
+  });
 
 export default RealEsatate;

@@ -11,13 +11,13 @@ export const UpdateEmployee = async (req, res) => {
     // Check if the updated location already exists for another user
     const existingUserWithLocation = await User.findOne({
       location: req.body.location,
-      _id: { $ne: id }, // Exclude the current user being updated
+      _id: { $ne: id }, // Excludes the current user being updated
     });
 
     if (existingUserWithLocation) {
       return res
         .status(409)
-        .json({ message: "Location already exists for another user" });
+        .json({ message: "This Location already exists for another user" });
     }
 
     const employee = await User.findOneAndUpdate(
