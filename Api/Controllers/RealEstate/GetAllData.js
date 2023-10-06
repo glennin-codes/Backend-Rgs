@@ -6,6 +6,7 @@ export const getData = async (req, res) => {
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
   const searchQuery = req.query.search || ''; // Get the search query from the request
+  const locationQuery = req.query.l|| ''; 
 
   try {
     let query = {};
@@ -22,24 +23,23 @@ export const getData = async (req, res) => {
         $lte: endDateWithoutTime,
       };
     }
-
-    // Build a query to search by name, location, and paymentId
+    
     if (searchQuery) {
       query.$or = [
         {  mudMar: { $regex: searchQuery, $options: 'i' } }, 
         { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
         { Degmada: { $regex: searchQuery, $options: 'i' } }, 
         { Tirsi: { $regex: searchQuery, $options: 'i' } }, 
-        { location: { $regex: searchQuery, $options: 'i' } }, 
+        { location: { $regex: locationQuery, $options: 'i' } }, 
       ];
     }
-
+    const totalItems = await RealEsatate.countDocuments(query);
     const skip = (page - 1) * limit;
     const items = await RealEsatate.find(query)
       .skip(skip)
       .limit(limit);
 
-    res.status(200).json(items);
+      res.status(200).json({ items, totalItems }); 
   } catch (err) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
