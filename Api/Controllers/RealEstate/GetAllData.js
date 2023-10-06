@@ -6,7 +6,7 @@ export const getData = async (req, res) => {
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
   const searchQuery = req.query.search || ''; // Get the search query from the request
-  const locationQuery = req.query.l|| ''; 
+  const locationQuery = req.query.l || ''; 
 
   try {
     let query = {};
