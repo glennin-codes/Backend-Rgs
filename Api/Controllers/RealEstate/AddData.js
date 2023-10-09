@@ -3,12 +3,11 @@ import RealEsatate from "../../Models/realEstate.js";
 
 // Controller function to create a new user
 export const createData = async (req, res) => {
+  console.log(req.body)
   try {
     // Extract data from the request body
     const { 
-      id,
-      name, 
- loaction,
+  
       No,
       BollectarioNo,
       Tirsi,
@@ -31,6 +30,9 @@ export const createData = async (req, res) => {
       ee,
       Agaasimaha,
       Duqa,
+      id,
+      name, 
+ location
      } = req.body;
 
     // Create a new User document
