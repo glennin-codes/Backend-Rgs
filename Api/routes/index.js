@@ -16,6 +16,7 @@ import {  deleteData } from '../Controllers/RealEstate/deleteData.js';
 import { createData } from '../Controllers/RealEstate/AddData.js';
 import { test } from '../Utils/Email/testing.js';
 import { RenewaAcount } from '../Controllers/User/Employee/Renewal.js';
+import { UpdateAdmin } from '../Controllers/User/Admin/UpdateAdmin.js';
 
 // import { removeAll } from '../Controllers/RealEstate/deleteAll.js';
 
@@ -45,6 +46,7 @@ router.get('/api',(req,res)=>{
 //Admin route
 router.route('/api/master-admin').post(upload.single('photo'),CreateMasterAdmin);
 router.route('/api/admin').post(MasterAdminMiddleware,upload.single('photo'),CreateAdmin)
+router.route('/api/admin/:id').put(MasterAdminMiddleware,UpdateAdmin);
 router.route('/api/employees').post( MasterAdminMiddleware,upload.single('photo'),CreateEmployee).get(MasterAdminMiddleware,getAllemployees);
 router.route('/api/employees/:id').delete(MasterAdminMiddleware,DeleteEmployee).put(authenticateJWT,UpdateEmployee);
 router.route('/api/user/renewal').post(MasterAdminMiddleware,RenewaAcount);
