@@ -3,7 +3,7 @@ import User from "../../../Models/User.js";
 
 export const getAllemployees = async (req, res) => {
   try {
-    const rolesToQuery = ["admin", "user","master-admin"]; // Add "admin" to the roles to query
+    const rolesToQuery = ["admin", "user"]; // Add "admin" to the roles to query
 
     const employees = await User.find({ role: { $in: rolesToQuery } });
 
