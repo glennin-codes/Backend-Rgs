@@ -1,16 +1,15 @@
 import User from "../../../Models/User.js"
 import bcrypt from "bcrypt";
 
-export const UpdateAdmin = async (req, res) => {
+export const UpdatePerson = async (req, res) => {
   try {
     const id = req.params.id;
     const password = req.body.password;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Check if the updated location already exists for another use
 
-    const admin = await User.findOneAndUpdate(
+    const person = await User.findOneAndUpdate(
       { _id: id },
       {
         name: req.body.name,
@@ -22,7 +21,7 @@ export const UpdateAdmin = async (req, res) => {
       { new: true }
     );
 
-    if (admin) {
+    if (person) {
       return res.status(200).json({ message: "User updated successfully" });
     } else {
       return res.status(404).json({ message: "User not found" });
