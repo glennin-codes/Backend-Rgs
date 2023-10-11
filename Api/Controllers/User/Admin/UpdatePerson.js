@@ -1,25 +1,42 @@
-import User from "../../../Models/User.js"
+import User from "../../../Models/User.js";
 import bcrypt from "bcrypt";
 
 export const UpdatePerson = async (req, res) => {
   try {
     const id = req.params.id;
-    const password = req.body.password;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Create an object to hold the fields to update
+    const updateFields = {};
 
+    // Check if name is provided in the request body
+    if (req.body.name) {
+      updateFields.name = req.body.name;
+    }
 
-    const person = await User.findOneAndUpdate(
-      { _id: id },
-      {
-        name: req.body.name,
-        location: req.body.location,
-        phone: req.body.phone,
-        email: req.body.email,
-        password: hashedPassword,
-      },
-      { new: true }
-    );
+    // Check if location is provided in the request body
+    if (req.body.location) {
+      updateFields.location = req.body.location;
+    }
+
+    // Check if phone is provided in the request body
+    if (req.body.phone) {
+      updateFields.phone = req.body.phone;
+    }
+
+    // Check if email is provided in the request body
+    if (req.body.email) {
+      updateFields.email = req.body.email;
+    }
+
+    // Check if password is provided in the request body
+    if (req.body.password) {
+      // Hash the provided password
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      updateFields.password = hashedPassword;
+    }
+
+    // Use $set operator to update only the specified fields
+    const person = await User.findOneAndUpdate({ _id: id }, { $set: updateFields }, { new: true });
 
     if (person) {
       return res.status(200).json({ message: "User updated successfully" });
