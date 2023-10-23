@@ -24,7 +24,7 @@ export const getData = async (req, res) => {
       };
     }
     
-    if (searchQuery) {
+    if (searchQuery || locationQuery) {
       query.$or = [
         {  mudMar: { $regex: searchQuery, $options: 'i' } }, 
         { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
