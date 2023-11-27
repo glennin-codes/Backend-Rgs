@@ -8,6 +8,7 @@ export const getSinglePerson=async(req,res)=>{
         if(!person){
             return res.status(404).json({message:"No person found"})
         }
+      
         return res.status(200).json({message:"Person fetched successfully",person})
 
     } catch (error) {
