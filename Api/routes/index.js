@@ -54,7 +54,7 @@ router.route('/api/employees/:id').delete(MasterAdminMiddleware,DeleteEmployee).
 router.route('/api/user/renewal').post(MasterAdminMiddleware,RenewaAcount);
 router.route('/api/user/profile/:id').get(authenticateJWT,getSinglePerson).patch(authenticateJWT,UpdatePerson);
 router.route('/api/login').post(Login);
-router.route('api/reviewPost/:id').get(authenticateJWT,getPostReviewData);
+router.route('/api/reviewPost/:id').get(authenticateJWT,getPostReviewData);
 router.route('/api/datas').get(MasterAdminMiddleware,getData).post(authenticateJWT,createData);
 router.route('/api/datas/:id').get(getSingleData).put(editData).delete(deleteData);
 // router.route('/api/delete').delete(removeAll);
