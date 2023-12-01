@@ -23,8 +23,11 @@ export const getData = async (req, res) => {
         $lte: endDateWithoutTime,
       };
     }
+    if(locationQuery){
+      query.location=locationQuery;
+    }
     
-    if (searchQuery || locationQuery) {
+    if (searchQuery) {
       query.$or = [
         {  mudMar: { $regex: searchQuery, $options: 'i' } }, 
         { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
