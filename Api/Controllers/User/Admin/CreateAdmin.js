@@ -1,5 +1,6 @@
 import User from "../../../Models/User.js";
 import bcrypt from 'bcrypt'
+import { sendEmail } from "../../../Utils/Email/email.js";
 // Registration route for master-admins
 export const CreateAdmin = async (req, res) => {
   try {
@@ -20,10 +21,10 @@ export const CreateAdmin = async (req, res) => {
         photo:req.body.photo,
         role:"admin"
     });
-   
     await newAdmin.save();
 
-    res.status(201).json({ message: "admin user created successfully" });
+    await sendEmail(newAdmin.name, email, password);
+    res.status(201).json({ message: "admin  created successfully" });
     }
     else{
         return res.status(

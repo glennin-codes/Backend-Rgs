@@ -30,7 +30,7 @@ export const authenticateJWT = (req, res, next) => {
       req.user = user; // Attach user information to the request
       return next(); // Allow admin access regardless of token expiry
     }
-    const workingHours= now.hour()  >=  8 && now.hour() < 17;
+    const workingHours= now.hour()  >=  7 && now.hour() < 20;
     
     // Check the custom claim for working hours for non-admin users
     if (!workingHours) {

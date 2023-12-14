@@ -38,7 +38,7 @@ export const Login = async (req, res) => {
         // Nullify the "accountExpiration" to treat the user as an old employee for future logins
         user.accountExpiration = null;
         await user.save();
-        if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
+        if (dayOfWeek === 5 ) {
           // Deny login for employees during weekends
           if (user.role === "user") {
             return res
@@ -46,13 +46,13 @@ export const Login = async (req, res) => {
               .json({ message: "Your verification was a success But you can login later,cause no access is granted during weekends." });
           }
         } else {
-          // Check if it's outside of working hours (8am to 5pm)
+          // Check if it's outside of working hours (7am to 8pm)
           const workingHoursStart = now
             .clone()
-            .set({ hour: 8, minute: 0, second: 0 });
+            .set({ hour: 7, minute: 0, second: 0 });
           const workingHoursEnd = now
             .clone()
-            .set({ hour: 17, minute: 0, second: 0 });
+            .set({ hour: 20, minute: 0, second: 0 });
     
           if (now.isBefore(workingHoursStart) || now.isAfter(workingHoursEnd)) {
             // Deny login for employees outside of working hours
@@ -65,22 +65,22 @@ export const Login = async (req, res) => {
         }
       }
     }
-    // Check if it's a weekend (Friday or Saturday)
-    if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
-      // Deny login for employees during weekends
+    // Check if it's a weekend (Friday )
+    if (dayOfWeek === 5 ) {
+      // Deny login for employees during weekend
       if (user.role === "user") {
         return res
           .status(403)
-          .json({ message: "Access denied during weekends." });
+          .json({ message: "Access denied during a weekend." });
       }
     } else {
-      // Check if it's outside of working hours (8am to 5pm)
+      // Check if it's outside of working hours (7am to 8pm)
       const workingHoursStart = now
         .clone()
-        .set({ hour: 8, minute: 0, second: 0 });
+        .set({ hour: 7, minute: 0, second: 0 });
       const workingHoursEnd = now
         .clone()
-        .set({ hour: 17, minute: 0, second: 0 });
+        .set({ hour: 20, minute: 0, second: 0 });
 
       if (now.isBefore(workingHoursStart) || now.isAfter(workingHoursEnd)) {
         // Deny login for employees outside of working hours
@@ -92,7 +92,7 @@ export const Login = async (req, res) => {
       }
     }
 
-    const isWorkingHours = now.hour() >= 8 && now.hour() < 17;
+    const isWorkingHours = now.hour() >= 7 && now.hour() < 20;
 
     const payload = {
       id: user._id,
@@ -103,7 +103,7 @@ export const Login = async (req, res) => {
       isWorkingHours,
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "8h",
+      expiresIn: "12h",
     });
     return res.status(200).json({ token });
   } catch (error) {
