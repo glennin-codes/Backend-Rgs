@@ -9,6 +9,7 @@ import createDebugger from "debug";
 import http from "http";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { createIndexes } from "../Models/realEstate.js";
 
 dotenv.config();
 const debug = createDebugger("rental-app:server");
@@ -21,6 +22,8 @@ async function connectToMongoDB() {
       useUnifiedTopology: true,
     });
     console.log("Connected to MongoDB");
+    await createIndexes();
+     
     startServer();
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);

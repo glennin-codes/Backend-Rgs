@@ -87,29 +87,32 @@ const estateSchema = new mongoose.Schema({
 
 const RealEsatate = mongoose.model("RealEsatate", estateSchema);
 
-async function createIndexes() {
-  
+export async function createIndexes() {
+  try {
+    // Check if the text index already exists
+    const existingIndexes = await RealEsatate.collection.indexes();
+    console.log(existingIndexes);
+    if (!existingIndexes.some(index => index.name === 'searchField_text')) {
+      // Concatenate the fields you want to search
+      estateSchema.virtual('searchField').get(function () {
+        return this.mudMar + ' ' + this.kunaYaal + ' ' + this.Degmada + ' ' + this.Tirsi + this.location + ' ';
+      });
 
-  // Concatenate the fields you want to search
-  estateSchema.virtual("searchField").get(function () {
-    return this.mudMar + " " + this.kunaYaal + " " + this.Degmada + " " + this.Tirsi + this.location + " ";
-  });
+      // Create a text index on the concatenated field
+      await RealEsatate.collection.createIndex({ searchField: 'text' });
+    }
 
-  // Create a text index on the concatenated field
-  await RealEsatate.collection.createIndex({ searchField: "text" });
+    // Check if the date index already exists
+    if (!existingIndexes.some(index => index.name === 'date_1')) {
+      // Create an index on the date field
+      await RealEsatate.collection.createIndex({ date: 1 });
+    }
 
-  await RealEsatate.collection.createIndex({ date: 1 });
- 
+    console.log('Indexes checked/created successfully');
+  } catch (error) {
+    console.error('Error checking/creating indexes:', error);
+  }
 }
 
-// Call the createIndexes function before starting your application
-createIndexes()
-  .then(() => {
-    console.log("Indexes created successfully");
-    // Start your application or server here
-  })
-  .catch((error) => {
-    console.error("Error creating index:", error);
-  });
 
 export default RealEsatate;
