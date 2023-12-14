@@ -23,19 +23,34 @@ export const getData = async (req, res) => {
         $lte: endDateWithoutTime,
       };
     }
-    if(locationQuery){
-      query.location=locationQuery;
-    }
+
+    // if(locationQuery){
+    //   query.location=locationQuery;
+    // }
     
-    if (searchQuery) {
-      query.$or = [
-        {  mudMar: { $regex: searchQuery, $options: 'i' } }, 
-        { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
-        { Degmada: { $regex: searchQuery, $options: 'i' } }, 
-        { Tirsi: { $regex: searchQuery, $options: 'i' } }, 
-        { location: { $regex: searchQuery, $options: 'i' } }, 
-      ];
+    // if (searchQuery) {
+    //   query.$or = [
+    //     {  mudMar: { $regex: searchQuery, $options: 'i' } }, 
+    //     { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
+    //     { Degmada: { $regex: searchQuery, $options: 'i' } }, 
+    //     { Tirsi: { $regex: searchQuery, $options: 'i' } }, 
+    //     { location: { $regex: searchQuery, $options: 'i' } }, 
+    //   ];
+    // }
+    //leveraging indexing
+    if (locationQuery) {
+      // Use the text index for the location query
+      query.$text = { $search: locationQuery };
     }
+
+    if (searchQuery) {
+      // Use the text index for the search query
+      query.$text = { $search: searchQuery };
+    }
+
+
+
+
     const totalItems = await RealEsatate.countDocuments(query);
     const skip = (page - 1) * limit;
     const items = await RealEsatate.find(query)
