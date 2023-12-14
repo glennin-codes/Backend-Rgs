@@ -17,7 +17,7 @@ export const UpdateEmployee = async (req, res) => {
     if (existingUserWithLocation) {
       return res
         .status(409)
-        .json({ message: "This Location already exists for another user" });
+        .json({ message: "This Location already asigned to another user" });
     }
 
     const employee = await User.findOneAndUpdate(

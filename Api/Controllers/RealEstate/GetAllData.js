@@ -33,7 +33,7 @@ export const getData = async (req, res) => {
         { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
         { Degmada: { $regex: searchQuery, $options: 'i' } }, 
         { Tirsi: { $regex: searchQuery, $options: 'i' } }, 
-        { location: { $regex: locationQuery, $options: 'i' } }, 
+        { location: { $regex: searchQuery, $options: 'i' } }, 
       ];
     }
     const totalItems = await RealEsatate.countDocuments(query);
