@@ -57,7 +57,7 @@ router.route('/api/user/profile/:id').get(authenticateJWT,getSinglePerson).patch
 router.route('/api/login').post(Login);
 router.route('/api/reviewPost/:id').get(authenticateJWT,getPostReviewData);
 router.route('/api/datas').get(AllAdminMiddleware,getData).post(authenticateJWT,createData);
-router.route('/api/datas/:id').get(getSingleData).put(editData).delete(deleteData);
+router.route('/api/datas/:id').get(authenticateJWT,getSingleData).put(authenticateJWT,editData).delete(authenticateJWT,deleteData);
 // router.route('/api/delete').delete(removeAll);
 router.route('/api/send').post(test)
 export default router;
