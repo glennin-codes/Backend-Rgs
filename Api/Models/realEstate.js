@@ -88,7 +88,7 @@ const estateSchema = new mongoose.Schema({
 const RealEsatate = mongoose.model("RealEsatate", estateSchema);
 
 async function createIndexes() {
-  await RealEsatate.collection.dropIndexes();
+  
 
   // Concatenate the fields you want to search
   estateSchema.virtual("searchField").get(function () {
