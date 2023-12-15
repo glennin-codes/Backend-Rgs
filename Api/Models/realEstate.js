@@ -89,24 +89,39 @@ const RealEsatate = mongoose.model("RealEsatate", estateSchema);
 
 export async function createIndexes() {
   try {
-    // Check if the text index already exists
+    // await RealEsatate.collection.dropIndexes();
+
+    // // Check if the text index already exists
+   
+    await RealEsatate.collection.createIndex({
+      mudMar: "text",
+      kunaYaal: "text",
+      Degmada: "text",
+      Tirsi: "text",
+      location: "text"
+    });
+    // await RealEsatate.collection.createIndex({location: "text"})
     const existingIndexes = await RealEsatate.collection.indexes();
-    console.log(existingIndexes);
-    if (!existingIndexes.some(index => index.name === 'searchField_text')) {
-      // Concatenate the fields you want to search
-      estateSchema.virtual('searchField').get(function () {
-        return this.mudMar + ' ' + this.kunaYaal + ' ' + this.Degmada + ' ' + this.Tirsi + this.location + ' ';
-      });
-
-      // Create a text index on the concatenated field
-      await RealEsatate.collection.createIndex({ searchField: 'text' });
-    }
-
-    // Check if the date index already exists
+    
+ // Check if the date index already exists
     if (!existingIndexes.some(index => index.name === 'date_1')) {
       // Create an index on the date field
       await RealEsatate.collection.createIndex({ date: 1 });
     }
+
+    console.log(existingIndexes); 
+
+    // // if (!existingIndexes.some(index => index.name === 'searchField_text')) {
+    // //   // Concatenate the fields you want to search
+    // //   estateSchema.virtual('searchField').get(function () {
+    // //     return this.mudMar + ' ' + this.kunaYaal + ' ' + this.Degmada + ' ' + this.Tirsi + this.location + ' ';
+    // //   });
+
+    // //   // Create a text index on the concatenated field
+    // //   await RealEsatate.collection.createIndex({ searchField: 'text' });
+    // // }
+
+   
 
     console.log('Indexes checked/created successfully');
   } catch (error) {
