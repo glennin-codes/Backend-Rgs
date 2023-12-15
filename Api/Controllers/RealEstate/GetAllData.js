@@ -36,7 +36,7 @@ if (locationQuery) {
   if (searchQuery) {
     if(!locationSearchPerformed){
          
-      query.$text = { $search: locationQuery };
+     
       // Use a regex search for the specified name within the specified location and dates
     query.$and = [
       { $or: [
@@ -48,6 +48,7 @@ if (locationQuery) {
      
     ];
     }else{
+       query.$text = { $search: locationQuery };
       query.$and = [
         { $or: [
            { mudMar: { $regex: searchQuery, $options: 'i' } }, 
