@@ -50,7 +50,7 @@ if (locationQuery) {
     }else{
     
       query.$and = [
-         query.$text = { $search: locationQuery },
+        { $text: { $search: locationQuery } },
         { $or: [
            { mudMar: { $regex: searchQuery, $options: 'i' } }, 
           { kunaYaal: { $regex: searchQuery, $options: 'i' } }, 
