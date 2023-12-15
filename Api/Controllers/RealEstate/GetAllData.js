@@ -76,6 +76,9 @@ if (locationQuery) {
   ]
 }
 
+if(locationQuery){
+ query.$text = { $search: locationQuery };
+}
 // Now 'query' contains the dynamic conditions based on the provided parameters
 
 
