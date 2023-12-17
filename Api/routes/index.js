@@ -21,6 +21,7 @@ import { getSinglePerson } from '../Controllers/User/getSinglePerson.js';
 import { getPostReviewData } from '../Controllers/RealEstate/getPostReviews.js';
 import { AllAdminMiddleware } from '../Controllers/User/Admin/AdminMiddleware.js';
 import { UploadFiles } from '../Controllers/RealEstate/File/UploadFiles/index.js';
+import { DownLoadFiles } from '../Controllers/RealEstate/File/Aws/downloadFiles/index.js';
 
 // import { removeAll } from '../Controllers/RealEstate/deleteAll.js';
 
@@ -62,7 +63,8 @@ router.route('/api/reviewPost/:id').get(authenticateJWT,getPostReviewData);
 router.route('/api/datas').get(AllAdminMiddleware,getData).post(authenticateJWT,createData);
 router.route('/api/datas/:id').get(authenticateJWT,getSingleData).put(authenticateJWT,editData).delete(authenticateJWT,deleteData);
 //files routes
-router.route('/api/uploadFiles/:userId').post(upload.array('files'),UploadFiles)
+router.route('/api/files/:userId').post(upload.array('files'),UploadFiles).get(DownLoadFiles)
+
 //testings outside scope.
 // router.route('/api/delete').delete(removeAll);
 router.route('/api/send').post(test)
