@@ -18,13 +18,13 @@ export const UploadFiles =async (req, res) => {
         Key: `${userId}/${file.originalname}`, // Organize files into user-specific folders
         Body: file.buffer,
       };
-
+      
       await s3.putObject(params).promise();
       
     });
 
     await Promise.all(uploadPromises);
-
+    res.set('Content-type', 'application/octet-stream');
     res.status(200).json({ message: 'Files uploaded successfully' });
   } catch (error) {
     console.error(error);
