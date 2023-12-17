@@ -6,7 +6,7 @@ export const DownLoadFiles= async (req, res) => {
       const userId = req.params.userId;
   
       const files = await s3.listObjectsV2({
-        Bucket: BUCKET_NAME,
+        Bucket: process.env.CYCLIC_BUCKET_NAME,
         Prefix: `${userId}/`,
       }).promise();
   
