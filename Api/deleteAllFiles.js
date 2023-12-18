@@ -14,7 +14,9 @@ export const getAllFiles =async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
-  
+ 
+
+// the delete wont work cause i dont have the use access 
 export const DeleteAllFiles = async (req, res) => {
     try {
       
