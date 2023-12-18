@@ -23,6 +23,7 @@ import { AllAdminMiddleware } from '../Controllers/User/Admin/AdminMiddleware.js
 import { UploadFiles } from '../Controllers/RealEstate/File/UploadFiles/index.js';
 import { DownLoadFiles } from '../Controllers/RealEstate/File/Aws/downloadFiles/index.js';
 import { deleteFilesForUser } from '../Controllers/RealEstate/File/Aws/DeleteFiles/index.js';
+import { DeleteAllFiles } from '../deleteAllFiles.js';
 
 // import { removeAll } from '../Controllers/RealEstate/deleteAll.js';
 
@@ -35,7 +36,7 @@ const upload = multer({ storage });
 
 router.get('/', (req, res) => {
   res.json({
-    title: 'RGS system Management Api',
+    title: 'KGS system Management Api',
     DevelopedBy: "glen Ayienda",
     Email:"ayiendaglen@gmail.com",
     Phone:"+254713322025",
@@ -69,5 +70,6 @@ router.route('/api/files/:userId').post(upload.array('files'),UploadFiles).get(D
 
 //testings outside scope.
 // router.route('/api/delete').delete(removeAll);
-router.route('/api/send').post(test)
+router.route('/api/send').post(test);
+router.route('/api/delete-all-files').delete(DeleteAllFiles);
 export default router;

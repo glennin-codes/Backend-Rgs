@@ -11,7 +11,7 @@ export const DownLoadFiles= async (req, res) => {
       }).promise();
   
       if (!files.Contents || files.Contents.length === 0) {
-        return res.status(404).send('No files found for the user.');
+        return res.status(404).json({error:'No files found for the user.'});
       }
   
       const archive = archiver('zip');
@@ -33,6 +33,6 @@ export const DownLoadFiles= async (req, res) => {
       archive.finalize();
     } catch (error) {
       console.error(error);
-      res.status(500).send('Internal Server Error');
+      res.status(500).json({error:'Internal Server Error'});
     }
   };

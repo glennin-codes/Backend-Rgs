@@ -15,7 +15,7 @@ try {
     console.error(error.message);
     res
       .status(500)
-      .json({ message: "Error while deleteing the user", error });
+      .json({ error: "Error while deleteing the user" });
 
 }
      

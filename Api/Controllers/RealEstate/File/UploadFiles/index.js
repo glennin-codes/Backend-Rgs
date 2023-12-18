@@ -9,7 +9,7 @@ export const UploadFiles =async (req, res) => {
     const files = req.files;
 
     if (!files || files.length === 0) {
-      return res.status(400).send('No files uploaded.');
+      return res.status(400).json({error:'No files uploaded.'});
     }
 
     const uploadPromises = files.map(async (file) => {
@@ -28,6 +28,6 @@ export const UploadFiles =async (req, res) => {
     res.status(200).json({ message: 'Files uploaded successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({error:'Internal Server Error'});
   }
 }
