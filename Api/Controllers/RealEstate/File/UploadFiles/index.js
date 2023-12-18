@@ -8,6 +8,10 @@ export const UploadFiles =async (req, res) => {
     const userId = req.params.userId;
     const files = req.files;
 
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is missing.' });
+    }
+    
     if (!files || files.length === 0) {
       return res.status(400).json({error:'No files uploaded.'});
     }
@@ -20,12 +24,13 @@ export const UploadFiles =async (req, res) => {
       };
       
       await s3.putObject(params).promise();
-      
+        return file.originalname;
+
     });
 
-    await Promise.all(uploadPromises);
-    res.set('Content-type', 'application/octet-stream');
-    res.status(200).json({ message: 'Files uploaded successfully' });
+    const uploadedFileNames = await Promise.all(uploadPromises);
+   console.log("files",uploadedFileNames);
+   res.status(200).json({ message: 'Files uploaded successfully', uploadedFiles: uploadedFileNames });
   } catch (error) {
     console.error(error);
     res.status(500).json({error:'Internal Server Error'});

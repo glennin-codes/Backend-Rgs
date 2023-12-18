@@ -23,7 +23,7 @@ import { AllAdminMiddleware } from '../Controllers/User/Admin/AdminMiddleware.js
 import { UploadFiles } from '../Controllers/RealEstate/File/UploadFiles/index.js';
 import { DownLoadFiles } from '../Controllers/RealEstate/File/Aws/downloadFiles/index.js';
 import { deleteFilesForUser } from '../Controllers/RealEstate/File/Aws/DeleteFiles/index.js';
-import { DeleteAllFiles } from '../deleteAllFiles.js';
+import { DeleteAllFiles, getAllFiles } from '../deleteAllFiles.js';
 
 // import { removeAll } from '../Controllers/RealEstate/deleteAll.js';
 
@@ -72,4 +72,5 @@ router.route('/api/files/:userId').post(upload.array('files'),UploadFiles).get(D
 // router.route('/api/delete').delete(removeAll);
 router.route('/api/send').post(test);
 router.route('/api/delete-all-files').delete(DeleteAllFiles);
+router.route('/api/get-all-files').get(getAllFiles);
 export default router;
