@@ -68,8 +68,11 @@ export const createData = async (req, res) => {
 
     // Save the user to the database
     await newData.save();
-
-    res.status(200).json({ message: 'Data uploaded successfully', data: newData });
+    const data={
+      name:newData.mudMar,
+      id:newData._id
+    }
+    res.status(200).json({ message: 'Data uploaded successfully', data });
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ error: 'Server error' });
