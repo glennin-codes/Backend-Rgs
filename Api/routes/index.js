@@ -63,7 +63,7 @@ router.route('/api/login').post(Login);
 //datas route
 router.route('/api/reviewPost/:id').get(authenticateJWT,getPostReviewData);
 router.route('/api/datas').get(AllAdminMiddleware,getData).post(authenticateJWT,createData);
-router.route('/api/datas/:id').get(authenticateJWT,getSingleData).put(authenticateJWT,editData).delete(authenticateJWT,deleteData);
+router.route('/api/datas/:id').get(authenticateJWT,getSingleData).patch(authenticateJWT,editData).delete(authenticateJWT,deleteData);
 //files routes
 router.route('/api/files/:userId').post(upload.array('files'),UploadFiles).get(DownLoadFiles).delete(deleteFilesForUser)
 
