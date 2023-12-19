@@ -1,5 +1,6 @@
-import RealEsatate from "../../Models/realEstate.js";
+
 import moment from "moment-timezone";
+import RealEsatate from "../../../Models/realEstate.js";
 
 export const getPostReviewData = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -21,7 +22,7 @@ export const getPostReviewData = async (req, res) => {
     // Calculate the start and end time for the working hours of the current day
     const startOfDay = now.clone().startOf('day');
     const startTime = startOfDay.clone().add(8, 'hours'); // 8:00 AM
-    const endTime = startOfDay.clone().add(17, 'hours'); // 5:00 PM\
+    const endTime = startOfDay.clone().add(20, 'hours'); // 8:00 PM\
     query.date = { $gte: startTime.toDate(), $lt: endTime.toDate() };
      
     if (searchQuery ) {

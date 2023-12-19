@@ -1,6 +1,6 @@
 import RealEsatate from "../../Models/realEstate.js";
 
-export const deleteData=async(req,res)=>{
+export const deleteData =async(req,res)=>{
     try {
         
 
@@ -21,7 +21,7 @@ export const deleteData=async(req,res)=>{
      catch (error) {
         console.error(error)
         res.status(500).json({
-           message:error
+           error
         });
     }
 }
