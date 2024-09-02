@@ -20,14 +20,18 @@ export const CreateEmployee = async (req, res) => {
         return res.status(409).json({ message: "User already exists" });
       }
       // Check if a user with a similar location already exists
-      const checkUserLocation = await User.findOne({ location: location });
+      const checkUserLocation = await User.findOne({ location: location ,role:'user'});
       if (checkUserLocation) {
         return res
           .status(409)
-          .json({ message: "User with a similar location already exists" });
+          .json({ "message": "A user with a similar location already exists. Please assign a different location." }          );
       }
-      // Create a new master-admin user
+      
       const hashedPassword = await bcrypt.hash(password, 10);
+
+      const verificationExpirationTime = moment(now).add(2, "hours");
+
+
       const newEmployee = new User({
         name: name,
         location: location,
@@ -35,13 +39,15 @@ export const CreateEmployee = async (req, res) => {
         email: email,
         password: hashedPassword,
         // photo: req.body.photo,
-        accountExpiration: moment(now).add(2, "hours").toDate(),
+        accountExpiration: verificationExpirationTime.toDate(),
       });
       console.log(newEmployee.accountExpiration);
 
       await newEmployee.save();
       await sendEmail(name, email, password);
-      res.status(201).json({ message: "Employee was created successfully" });
+      res.status(201).json({
+        message: `Account for the new employ was created successfully. A verification email with login details has been sent to the user's email and will expire at ${verificationExpirationTime.format("hh:mm A")}. The user must verify their account within 2 hours to avoid deactivation.`,
+      });
     } else {
       return res
         .status(400)

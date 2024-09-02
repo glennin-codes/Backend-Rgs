@@ -5,8 +5,8 @@ export const sendCredentials = (name, email, pwd) => {
   const mailGenerator = new Mailgen({
     theme: 'default',
     product: {
-      name: 'RGS',
-      link: 'https://rgsdashboard.netlify.app/',
+      name: 'Dowlladahahoosekgs',
+      link: 'https://dowlladahahoosekgs.com/',
     },
   });
 
@@ -14,7 +14,7 @@ export const sendCredentials = (name, email, pwd) => {
   const emailContent = {
     body: {
       name: name,
-      intro: 'Welcome to Rgs, we are excited to have you on board! Here are your login details:',
+      intro: 'Welcome to Dowlladahahoosekgs, we are excited to have you on board! Here are your login details:',
       table: {
         data: [
           {
@@ -36,7 +36,7 @@ export const sendCredentials = (name, email, pwd) => {
         button: {
           color: '#22BC66',
           text: 'Log In',
-          link: 'https://rgsdashboard.netlify.app/',
+          link: 'https://dowlladahahoosekgs.com/',
         },
       },
       outro: 'If you have any questions, feel free to reply to this email.',
