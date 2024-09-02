@@ -16,6 +16,7 @@ app.use(express.json({limit: '60mb'}));app.use(express.urlencoded({
   type: 'application/x-www-form-urlencoded'
 }));
 
+
 app.use(cookieParser());
 // app.use(static(join(__dirname, 'public')));
 
